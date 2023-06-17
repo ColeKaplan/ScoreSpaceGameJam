@@ -7,8 +7,10 @@ public class hero_behavior : MonoBehaviour
 
     private bool inPlay;
     private HeroState state;
-    private float speed = 5.0f;
+    private float speed = 3.5f;
     public int coins;
+
+    public GameObject bullet;
 
     void Start()
     {
@@ -23,11 +25,15 @@ public class hero_behavior : MonoBehaviour
         if (inPlay)
         {
             if (Input.GetKey(KeyCode.DownArrow))
-            {  
+            {
                 state = HeroState.WalkingDown;
             } else if (Input.GetKey(KeyCode.UpArrow))
             {
                 state = HeroState.WalkingUp;
+            } else if (Input.GetKey(KeyCode.Space))
+            {
+                Vector3 position = transform.position + new Vector3(1, 0, 0);
+                GameObject instance = Instantiate(bullet, position, Quaternion.identity);
             } else
             {
                 state = HeroState.Walking;
@@ -51,10 +57,8 @@ public class hero_behavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("coin!");
         if (other.gameObject.CompareTag("coin"))
         {
-            Debug.Log("coin!");
             coins += 1;
             Destroy(other.gameObject);
         }

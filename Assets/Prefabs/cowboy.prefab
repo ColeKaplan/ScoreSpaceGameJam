@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 0
+  bullet: {fileID: 5404952690104185217, guid: f750699bf97c7414082f7e89251f1225, type: 3}
 --- !u!50 &-3759537598611143312
 Rigidbody2D:
   serializedVersion: 4

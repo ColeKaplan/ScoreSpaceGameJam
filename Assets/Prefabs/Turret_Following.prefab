@@ -101,3 +101,4 @@ MonoBehaviour:
   laserPrefab: {fileID: 102316159419468350, guid: 08a984abfade9d6469caaf9f5181db1f, type: 3}
   cowboyPrefab: {fileID: 750285416907767269, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
   health: 3
+  shootingInterval: 1
