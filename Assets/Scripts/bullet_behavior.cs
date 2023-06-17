@@ -16,7 +16,7 @@ public class bullet_behavior : MonoBehaviour
     
     void Update()
     {
-        if (transform.position.x > camera.transform.position.x)
+        if (!IsVisible(gameObject, camera.GetComponent<Camera>()))
         {
             Debug.Log("bullet destroyed - camera");
             Destroy(gameObject);
@@ -31,5 +31,11 @@ public class bullet_behavior : MonoBehaviour
             Debug.Log("bullet destroyed - turret");
             Destroy(gameObject);
         }
+    }
+
+    bool IsVisible(GameObject gameObject, Camera camera)
+    {
+        Vector3 viewportPoint = camera.WorldToViewportPoint(gameObject.transform.position);
+        return viewportPoint.z > 0 && viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1;
     }
 }
