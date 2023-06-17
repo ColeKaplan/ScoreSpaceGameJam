@@ -12,8 +12,13 @@ public class hero_behavior : MonoBehaviour
     private float throwCooldown = 0.2f;
     public int coins;
     public int hats;
+    private float distanceToBank;
+    private float distancex;
+    private Vector2 previousPosition;
 
     public GameObject bullet;
+    public GameObject bank;
+    private GameObject bankInstance;
 
     void Start()
     {
@@ -26,7 +31,28 @@ public class hero_behavior : MonoBehaviour
     {
         if (inPlay)
         {
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (state == HeroState.WalkingToBank)
+            {
+                float distance = Vector2.Distance(bankInstance.transform.position, transform.position);
+                if (distance <= 1.5f)
+                {
+                    state = HeroState.AtBank;
+                }
+            } else if (state == HeroState.AtBank)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    state = HeroState.Walking;
+                }
+            } else if (distancex >= distanceToBank)
+            {
+                state = HeroState.WalkingToBank;
+                Vector3 position = transform.position + new Vector3(12, 2, 0);
+                bankInstance = Instantiate(bank, position, Quaternion.identity);
+                distancex = 0;
+                distanceToBank = Random.Range(100f, 200f);
+                previousPosition = transform.position;
+            } else if (Input.GetKey(KeyCode.DownArrow))
             {
                 state = HeroState.WalkingDown;
             } else if (Input.GetKey(KeyCode.UpArrow))
@@ -37,7 +63,7 @@ public class hero_behavior : MonoBehaviour
                 if (hats > 0 && canThrow)
                 { 
                     canThrow = false;
-                    ThrowHat(); 
+                    ThrowHat();
                 }
             } else
             {
@@ -55,8 +81,17 @@ public class hero_behavior : MonoBehaviour
                 case HeroState.WalkingUp:
                     transform.Translate(new Vector2(speed * Time.deltaTime, speed * Time.deltaTime));
                     break;
+                case HeroState.WalkingToBank:
+                    Vector2 targetPosition = new Vector2(bankInstance.transform.position.x, bankInstance.transform.position.y - 1); 
+                    transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                    break;
+                case HeroState.AtBank:
+                    break;
+                default:
+                    break;
                 
             }
+            distancex = transform.position.x - previousPosition.x;
         }
     }
 
@@ -76,6 +111,9 @@ public class hero_behavior : MonoBehaviour
         state = HeroState.Walking;
         coins = 0;
         hats = 10;
+        distanceToBank = Random.Range(100f, 200f);
+        distancex = 0;
+        previousPosition = transform.position;
     }
 
     private void ThrowHat()
@@ -90,7 +128,9 @@ public class hero_behavior : MonoBehaviour
     {
         Walking,
         WalkingDown,
-        WalkingUp
+        WalkingUp,
+        WalkingToBank,
+        AtBank
     }
 
     IEnumerator ThrowCooldown()
