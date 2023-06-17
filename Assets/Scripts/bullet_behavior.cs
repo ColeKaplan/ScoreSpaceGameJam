@@ -5,22 +5,22 @@ using UnityEngine;
 public class bullet_behavior : MonoBehaviour
 {
     
-    private float speed = 8;
+    private float speed = 12;
     public GameObject camera;
     private float spinningInterval = .1f;
     private float timer = 0f; // Timer to track the elapsed time
+    private float killTime = 2.0f;
 
     void Start()
     {
         //gameObject.GetComponent<Rigidbody>().velocity = Vector3.right * speed;
+        StartCoroutine(KillTimer());
     }
 
     
     void Update()
     {
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.right * speed;
-
-
         timer += Time.deltaTime; // Increase the timer by the elapsed time
 
         if (timer >= spinningInterval)
@@ -29,15 +29,7 @@ public class bullet_behavior : MonoBehaviour
             timer = 0f; // Reset the timer after shooting
             
         }
-
-        /*if (!IsVisible(gameObject, camera.GetComponent<Camera>()))
-        {
-            Debug.Log("bullet destroyed - camera");
-            Destroy(gameObject);
-        }*/
-        //transform.Translate(new Vector2(speed * Time.deltaTime, 0));
         
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -58,5 +50,16 @@ public class bullet_behavior : MonoBehaviour
     void Spin()
     {
         this.transform.Rotate(0f, 0f, 45f);
+    }
+
+    IEnumerator KillTimer()
+    {
+        float elapsed = 0;
+        while (elapsed < killTime)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }
