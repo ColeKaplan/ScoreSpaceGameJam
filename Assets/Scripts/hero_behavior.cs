@@ -25,7 +25,7 @@ public class hero_behavior : MonoBehaviour
         if (inPlay)
         {
             if (Input.GetKey(KeyCode.DownArrow))
-            {  
+            {
                 state = HeroState.WalkingDown;
             } else if (Input.GetKey(KeyCode.UpArrow))
             {
