@@ -5,7 +5,7 @@ using UnityEngine;
 public class bullet_behavior : MonoBehaviour
 {
     
-    private float speed = 8;
+    private float speed = 12;
     public GameObject camera;
     private float spinningInterval = .1f;
     private float timer = 0f; // Timer to track the elapsed time
