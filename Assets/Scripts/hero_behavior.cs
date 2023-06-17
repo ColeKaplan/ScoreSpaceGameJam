@@ -5,6 +5,7 @@ using UnityEngine;
 public class hero_behavior : MonoBehaviour
 {
 
+    public int health = 6;
     private bool inPlay;
     private bool canThrow;
     private HeroState state;
@@ -19,6 +20,9 @@ public class hero_behavior : MonoBehaviour
     public GameObject bullet;
     public GameObject bank;
     private GameObject bankInstance;
+
+    //Add this if we want hearts on the screen
+    //public Canvas heartCanvas;
 
     void Start()
     {
@@ -143,5 +147,24 @@ public class hero_behavior : MonoBehaviour
         }
         canThrow = true;
     }
+
+    /*public void getHit(int damage)
+    {
+        health -= damage;
+        heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        this.GetComponent<PlayerMovement>().gotHit();
+        if (health > 0)
+        {
+            animator.SetTrigger("Hurt");
+        }
+        //Debug.Log("player took " + damage + "damage");
+        if (health <= 0 && firstDeath)
+        {
+            firstDeath = false;
+            Debug.Log("dead");
+            //heartCanvas.GetComponent<DarkScreen>().darken();
+        }
+    }*/
+    //if we implement health
 
 }
