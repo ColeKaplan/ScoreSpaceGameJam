@@ -6,7 +6,7 @@ public class bullet_behavior : MonoBehaviour
 {
     
     private float speed = 8;
-    public new GameObject camera; // weird thing suggestion again
+    public GameObject camera;
     private float spinningInterval = .1f;
     private float timer = 0f; // Timer to track the elapsed time
 
