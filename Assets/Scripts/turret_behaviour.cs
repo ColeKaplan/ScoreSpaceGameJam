@@ -74,7 +74,9 @@ void Update()
 
     private void GenerateLaser(Quaternion rotation)
     {
-        Vector3 spawnPosition = transform.position + (rotation * Vector3.up * 0.5f); // Distance from turret
+        //rotation *= Quaternion.Euler(0f, 0f, 90f);
+        rotation *= Quaternion.Euler(0f, 0f, 90f);
+        Vector3 spawnPosition = transform.position + (rotation * Vector3.right * 0.5f); // Distance from turret
 
         GameObject laser = Instantiate(laserPrefab, spawnPosition, rotation);
         // Add any necessary logic to handle the laser prefab behavior
