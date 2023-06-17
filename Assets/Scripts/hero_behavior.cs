@@ -49,6 +49,17 @@ public class hero_behavior : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("coin!");
+        if (other.gameObject.CompareTag("coin"))
+        {
+            Debug.Log("coin!");
+            coins += 1;
+            Destroy(other.gameObject);
+        }
+    }
+
     private void startGame()
     {
         inPlay = true;
