@@ -1042,6 +1042,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715317979}
   m_CullTransparentMesh: 1
+--- !u!1 &806335551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2245612380436345839, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+  m_PrefabInstance: {fileID: 1593939428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &830279676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1193,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: cowboy
       objectReference: {fileID: 0}
+    - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: bankScene
+      value: 
+      objectReference: {fileID: 2018611727}
+    - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: blackScreen
+      value: 
+      objectReference: {fileID: 806335551}
     - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2293,7 +2306,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2245612380436345839, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3312,6 +3345,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004741295}
   m_CullTransparentMesh: 1
+--- !u!1 &2018611727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2245612380436345839, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+  m_PrefabInstance: {fileID: 1566401379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2097975162
 GameObject:
   m_ObjectHideFlags: 0
