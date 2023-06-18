@@ -2291,6 +2291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BankScene
       objectReference: {fileID: 0}
+    - target: {fileID: 2245612380436345839, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2495,6 +2499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2654,7 +2662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1644618287
 MonoBehaviour:
   m_ObjectHideFlags: 0
