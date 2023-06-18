@@ -5,21 +5,19 @@ using UnityEngine;
 public class background_scroll : MonoBehaviour
 {
 
-    public GameObject camera;
-    private float backgroundWidth;
-    
-    void Start()
+    public float scrollSpeed = 1f;
+    public float tileSize = 10f;
+
+    private Vector3 startPosition;
+
+    private void Start()
     {
-        backgroundWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+        startPosition = transform.position;
     }
 
-    
-    void Update()
+    private void Update()
     {
-        if (transform.position.x + backgroundWidth < camera.transform.position.x)
-        {
-            Vector2 newPos = new Vector2(transform.position.x + 2 * backgroundWidth - 0.1f, transform.position.y);
-            transform.position = newPos;
-        }
+        float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSize);
+        transform.position = startPosition + Vector3.back * newPosition;
     }
 }
