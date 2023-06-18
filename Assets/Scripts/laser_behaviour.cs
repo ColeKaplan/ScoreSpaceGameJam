@@ -5,10 +5,10 @@ using UnityEngine;
 public class laser_behaviour : MonoBehaviour
 {
 
-    public float speed = 4;
+    public float speed = 2;
     private float timer = 0f; // Timer to track the elapsed time
     private float killTime = 10.0f;
-    public float movementDelay = .5f;
+    public float movementDelay = .2f;
 
     void Start()
     {
@@ -25,7 +25,9 @@ public class laser_behaviour : MonoBehaviour
         if (timer >= movementDelay)
         {
             //gameObject.GetComponent<Rigidbody2D>().velocity = transform.rotation * Vector3.right * speed;
+            //print("here");
             gameObject.transform.position += transform.rotation * Vector3.right * speed;
+            //print(gameObject.transform.position += transform.rotation * Vector3.right * speed);
             timer = 0f; // Reset the timer after shooting
 
         }
@@ -34,10 +36,11 @@ public class laser_behaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("turret"))
+        //Debug.Log(other.gameObject.tag);
+        if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("bullet destroyed - turret");
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            other.GetComponent<hero_behavior>().getHit(1);
         }
     }
 
