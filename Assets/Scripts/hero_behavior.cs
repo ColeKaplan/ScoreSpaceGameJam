@@ -148,23 +148,21 @@ public class hero_behavior : MonoBehaviour
         canThrow = true;
     }
 
-    /*public void getHit(int damage)
+    public void getHit(int damage)
     {
         health -= damage;
-        heartCanvas.GetComponent<HeartScript>().healthSet(health);
-        this.GetComponent<PlayerMovement>().gotHit();
+        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
         if (health > 0)
         {
             animator.SetTrigger("Hurt");
         }
-        //Debug.Log("player took " + damage + "damage");
-        if (health <= 0 && firstDeath)
+        //Debug.Log("player took " + damage + "damage");*/
+        if (health <= 0)
         {
-            firstDeath = false;
             Debug.Log("dead");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
-    }*/
+    }
     //if we implement health
 
 }
