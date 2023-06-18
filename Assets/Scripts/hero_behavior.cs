@@ -194,17 +194,5 @@ public class hero_behavior : MonoBehaviour
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
     }
- 
-        
-
-
-    /*Color color = blackScreen.GetComponent<Image>().color;
-        //color.a = 0.0f;
-        blackScreen.GetComponent<Image>().color = color;
-        color = bankScene.GetComponent<Image>().color;
-        color.a = 0.0f;
-        Debug.Log("here: " + color.a);
-        bankScene.GetComponent<Image>().color = color;
-        Debug.Log("here2: " + bankScene.GetComponent<Image>().color.a);*/
 
 }
