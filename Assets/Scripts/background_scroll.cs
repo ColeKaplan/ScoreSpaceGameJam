@@ -5,7 +5,7 @@ using UnityEngine;
 public class background_scroll : MonoBehaviour
 {
 
-    public GameObject camera;
+    public new GameObject camera;
     private float backgroundWidth;
     
     void Start()
