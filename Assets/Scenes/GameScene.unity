@@ -1206,12 +1206,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2753238
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.24544488
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6225
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.8611546
+      value: -6.7161
       objectReference: {fileID: 0}
     - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30625594
+      value: -0.4559
       objectReference: {fileID: 0}
     - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1576,6 +1588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51406133641ee4e6a992cdf3ec2ce1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollSpeed: 1
+  tileSize: 10
   camera: {fileID: 871705311}
 --- !u!1 &946045992
 GameObject:
@@ -2310,19 +2324,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Enabled
@@ -2435,6 +2449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51406133641ee4e6a992cdf3ec2ce1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollSpeed: 1
+  tileSize: 10
   camera: {fileID: 871705311}
 --- !u!1001 &1593939428
 PrefabInstance:
@@ -2531,6 +2547,22 @@ PrefabInstance:
     - target: {fileID: 2245612380436345839, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
       propertyPath: m_Name
       value: BlackScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
       propertyPath: m_Enabled
@@ -2771,8 +2803,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1593939429}
   - {fileID: 1566401380}
+  - {fileID: 1593939429}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
