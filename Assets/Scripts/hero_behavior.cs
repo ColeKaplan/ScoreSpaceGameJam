@@ -20,6 +20,11 @@ public class hero_behavior : MonoBehaviour
     public GameObject bullet;
     public GameObject bank;
     private GameObject bankInstance;
+    public GameObject blackScreen;
+    public GameObject bankScene;
+
+    private Animator blackAnimator;
+    private Animator bankAnimator;
 
     //Add this if we want hearts on the screen
     //public Canvas heartCanvas;
@@ -28,6 +33,8 @@ public class hero_behavior : MonoBehaviour
     {
         transform.position = new Vector2(-6.0f, 0);
         inPlay = false;
+        blackAnimator = blackScreen.GetComponent<Animator>();
+        bankAnimator = bankScene.GetComponent<Animator>();
         startGame();
     }
 
@@ -40,18 +47,24 @@ public class hero_behavior : MonoBehaviour
                 float distance = Vector2.Distance(bankInstance.transform.position, transform.position);
                 if (distance <= 1.5f)
                 {
+                    Debug.Log("");
                     state = HeroState.AtBank;
+                    blackAnimator.Play("FadeInAndOutBlack");
+                    bankAnimator.Play("FadeInBank");
                 }
             } else if (state == HeroState.AtBank)
             {
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     state = HeroState.Walking;
+                    blackAnimator.Play("FadeInAndOutBlack");
+                    bankAnimator.Play("FadeOutBank");
                 }
             } else if (distancex >= distanceToBank)
             {
                 state = HeroState.WalkingToBank;
-                Vector3 position = transform.position + new Vector3(12, 2, 0);
+                Vector3 position = transform.position + new Vector3(18, 3, 0);
                 bankInstance = Instantiate(bank, position, Quaternion.identity);
                 distancex = 0;
                 distanceToBank = Random.Range(100f, 200f);
@@ -96,7 +109,7 @@ public class hero_behavior : MonoBehaviour
                 
             }
             distancex = transform.position.x - previousPosition.x;
-        }
+        } 
     }
 
     void OnTriggerEnter2D(Collider2D other)
