@@ -18,7 +18,7 @@ public class turret_behaviour : MonoBehaviour
     public int health = 3;
     public float shootingInterval = 1f;
 
-    private float timer = 0f; // Timer to track the elapsed time
+    public float timer = 0f; // Timer to track the elapsed time
 
 
     // Start is called before the first frame update
