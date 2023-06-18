@@ -2310,19 +2310,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
       propertyPath: m_Enabled
@@ -2531,6 +2531,22 @@ PrefabInstance:
     - target: {fileID: 2245612380436345839, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
       propertyPath: m_Name
       value: BlackScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8814915531311824680, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
       propertyPath: m_Enabled
@@ -2771,8 +2787,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1593939429}
   - {fileID: 1566401380}
+  - {fileID: 1593939429}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
