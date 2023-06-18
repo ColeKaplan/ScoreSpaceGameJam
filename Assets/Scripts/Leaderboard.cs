@@ -9,11 +9,13 @@ public class Leaderboard : MonoBehaviour
     int leaderboardID = 15205;
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
+    public GameObject bank;
+    public TextMeshProUGUI Score;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //int score = bank.GetComponent<hero_behavior>().getHats()
     }
 
     [System.Obsolete]

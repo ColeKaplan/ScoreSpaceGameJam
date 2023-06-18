@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class hero_behavior : MonoBehaviour
@@ -36,14 +37,6 @@ public class hero_behavior : MonoBehaviour
         inPlay = false;
         blackAnimator = blackScreen.GetComponent<Animator>();
         bankAnimator = bankScene.GetComponent<Animator>();
-        Color color = blackScreen.GetComponent<Image>().color;
-        //color.a = 0.0f;
-        blackScreen.GetComponent<Image>().color = color;
-        color = bankScene.GetComponent<Image>().color;
-        color.a = 0.0f;
-        Debug.Log("here: " + color.a);
-        bankScene.GetComponent<Image>().color = color;
-        Debug.Log("here2: " + bankScene.GetComponent<Image>().color.a);
         startGame();
     }
 
@@ -183,9 +176,21 @@ public class hero_behavior : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("dead");
+            SceneManager.LoadScene("Leaderboard");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
     }
-    //if we implement health
+ 
+        
+
+
+    /*Color color = blackScreen.GetComponent<Image>().color;
+        //color.a = 0.0f;
+        blackScreen.GetComponent<Image>().color = color;
+        color = bankScene.GetComponent<Image>().color;
+        color.a = 0.0f;
+        Debug.Log("here: " + color.a);
+        bankScene.GetComponent<Image>().color = color;
+        Debug.Log("here2: " + bankScene.GetComponent<Image>().color.a);*/
 
 }
