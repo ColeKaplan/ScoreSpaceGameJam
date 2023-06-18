@@ -37,6 +37,8 @@ public class hero_behavior : MonoBehaviour
         inPlay = false;
         blackAnimator = blackScreen.GetComponent<Animator>();
         bankAnimator = bankScene.GetComponent<Animator>();
+        bankScene.GetComponent<Image>().enabled = false;
+        Debug.Log("image enabled: " + bankScene.GetComponent<Image>().enabled);
         startGame();
     }
 
@@ -49,11 +51,10 @@ public class hero_behavior : MonoBehaviour
                 float distance = Vector2.Distance(bankInstance.transform.position, transform.position);
                 if (distance <= 1.5f)
                 {
-                    Debug.Log("Entering bank");
-                    state = HeroState.AtBank;
-                    
+                    state = HeroState.AtBank;   
                     blackAnimator.SetTrigger("FadeToBlack");
-                    bankAnimator.SetBool("FadeIn", true);
+                    StartCoroutine(ToggleBankScene());
+
                 }
             } else if (state == HeroState.AtBank)
             {
@@ -62,7 +63,7 @@ public class hero_behavior : MonoBehaviour
                 {
                     state = HeroState.Walking;
                     blackAnimator.SetTrigger("FadeToBlack");
-                    bankAnimator.SetBool("FadeOut", true);
+                    StartCoroutine(ToggleBankScene());
                 }
             } else if (distancex >= distanceToBank)
             {
@@ -70,14 +71,8 @@ public class hero_behavior : MonoBehaviour
                 Vector3 position = transform.position + new Vector3(18, 3, 0);
                 bankInstance = Instantiate(bank, position, Quaternion.identity);
                 distancex = 0;
-                distanceToBank = Random.Range(100f, 200f);
+                distanceToBank = Random.Range(30f, 40f);
                 previousPosition = transform.position;
-            } else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                state = HeroState.WalkingDown;
-            } else if (Input.GetKey(KeyCode.UpArrow))
-            {
-                state = HeroState.WalkingUp;
             } else if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (hats > 0 && canThrow)
@@ -85,6 +80,12 @@ public class hero_behavior : MonoBehaviour
                     canThrow = false;
                     ThrowHat();
                 }
+            } else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                state = HeroState.WalkingDown;
+            } else if (Input.GetKey(KeyCode.UpArrow))
+            {
+                state = HeroState.WalkingUp;
             } else
             {
                 state = HeroState.Walking;
@@ -102,7 +103,7 @@ public class hero_behavior : MonoBehaviour
                     transform.Translate(new Vector2(speed * Time.deltaTime, speed * Time.deltaTime));
                     break;
                 case HeroState.WalkingToBank:
-                    Vector2 targetPosition = new Vector2(bankInstance.transform.position.x, bankInstance.transform.position.y - 1); 
+                    Vector2 targetPosition = new Vector3(bankInstance.transform.position.x, bankInstance.transform.position.y - 1, 5); 
                     transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
                     break;
                 case HeroState.AtBank:
@@ -131,7 +132,7 @@ public class hero_behavior : MonoBehaviour
         state = HeroState.Walking;
         coins = 0;
         hats = 10;
-        distanceToBank = Random.Range(100f, 200f);
+        distanceToBank = Random.Range(30f, 40f);
         distancex = 0;
         previousPosition = transform.position;
     }
@@ -162,6 +163,18 @@ public class hero_behavior : MonoBehaviour
             yield return null;
         }
         canThrow = true;
+    }
+    
+    IEnumerator ToggleBankScene()
+    {
+        float elapsed = 0f;
+        float duration = 0.35f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        bankScene.GetComponent<Image>().enabled = bankScene.GetComponent<Image>().enabled ? false : true;
     }
 
     public void getHit(int damage)
