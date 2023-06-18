@@ -58,7 +58,7 @@ void Update()
             }
         }
 
-        if (transform.position.x < cowboyPrefab.transform.position.x)
+        if (transform.position.x < cowboyPrefab.transform.position.x - 2)
         {
             Destroy(gameObject);
         }
@@ -85,7 +85,24 @@ void Update()
         // Adjust the laserPrefab instantiation as needed based on your game's requirements
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void getHit(int damage)
+    {
+        health -= damage;
+        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        if (health > 0)
+        {
+            animator.SetTrigger("Hurt");
+        }
+        //Debug.Log("player took " + damage + "damage");*/
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+            //heartCanvas.GetComponent<DarkScreen>().darken();
+        }
+    }
+
+    //bullet behaviour detects the collision
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
         {
@@ -95,5 +112,5 @@ void Update()
                 Destroy(gameObject);
             }
         }
-    }
+    }*/
 }

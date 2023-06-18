@@ -36,8 +36,8 @@ public class bullet_behavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("turret"))
         {
-            Debug.Log("bullet destroyed - turret");
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            other.gameObject.GetComponent<turret_behaviour>().getHit(1);
         }
     }
 
