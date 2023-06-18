@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class hero_behavior : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class hero_behavior : MonoBehaviour
         inPlay = false;
         blackAnimator = blackScreen.GetComponent<Animator>();
         bankAnimator = bankScene.GetComponent<Animator>();
+        Color color = blackScreen.GetComponent<Image>().color;
+        //color.a = 0.0f;
+        blackScreen.GetComponent<Image>().color = color;
+        color = bankScene.GetComponent<Image>().color;
+        color.a = 0.0f;
+        Debug.Log("here: " + color.a);
+        bankScene.GetComponent<Image>().color = color;
+        Debug.Log("here2: " + bankScene.GetComponent<Image>().color.a);
         startGame();
     }
 
@@ -47,10 +56,11 @@ public class hero_behavior : MonoBehaviour
                 float distance = Vector2.Distance(bankInstance.transform.position, transform.position);
                 if (distance <= 1.5f)
                 {
-                    Debug.Log("");
+                    Debug.Log("Entering bank");
                     state = HeroState.AtBank;
-                    blackAnimator.Play("FadeInAndOutBlack");
-                    bankAnimator.Play("FadeInBank");
+                    
+                    blackAnimator.SetTrigger("FadeToBlack");
+                    bankAnimator.SetBool("FadeIn", true);
                 }
             } else if (state == HeroState.AtBank)
             {
@@ -58,8 +68,8 @@ public class hero_behavior : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     state = HeroState.Walking;
-                    blackAnimator.Play("FadeInAndOutBlack");
-                    bankAnimator.Play("FadeOutBank");
+                    blackAnimator.SetTrigger("FadeToBlack");
+                    bankAnimator.SetBool("FadeOut", true);
                 }
             } else if (distancex >= distanceToBank)
             {
