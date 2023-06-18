@@ -11,7 +11,8 @@ public class hero_behavior : MonoBehaviour
     private bool inPlay;
     private bool canThrow;
     private HeroState state;
-    private float speed = 3.5f;
+    private float verticalSpeed = 5f;
+    private float horizontalSpeed = 4f;
     private float throwCooldown = 0.2f;
     public int coins;
     public int hats;
@@ -94,17 +95,17 @@ public class hero_behavior : MonoBehaviour
             switch (state)
             {
                 case HeroState.Walking:
-                    transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+                    transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, 0));
                     break;
                 case HeroState.WalkingDown:
-                    transform.Translate(new Vector2(speed * Time.deltaTime, -speed * Time.deltaTime));
+                    transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, -verticalSpeed * Time.deltaTime));
                     break;
                 case HeroState.WalkingUp:
-                    transform.Translate(new Vector2(speed * Time.deltaTime, speed * Time.deltaTime));
+                    transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime));
                     break;
                 case HeroState.WalkingToBank:
                     Vector2 targetPosition = new Vector3(bankInstance.transform.position.x, bankInstance.transform.position.y - 1, 5); 
-                    transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, targetPosition, horizontalSpeed * Time.deltaTime);
                     break;
                 case HeroState.AtBank:
                     break;
