@@ -5,15 +5,22 @@ using UnityEngine;
 public class background_scroll : MonoBehaviour
 {
 
+//had some merge conflicts, please look over this
+
     public float scrollSpeed = 1f;
     public float tileSize = 10f;
 
     private Vector3 startPosition;
 
     private void Start()
+    
+    public new GameObject camera;
+    private float backgroundWidth;
+    
+    /*void Start()
     {
         startPosition = transform.position;
-    }
+    }*/
 
     private void Update()
     {

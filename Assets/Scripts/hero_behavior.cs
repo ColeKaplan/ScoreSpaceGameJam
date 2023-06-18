@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class hero_behavior : MonoBehaviour
 {
@@ -20,6 +22,11 @@ public class hero_behavior : MonoBehaviour
     public GameObject bullet;
     public GameObject bank;
     private GameObject bankInstance;
+    public GameObject blackScreen;
+    public GameObject bankScene;
+
+    private Animator blackAnimator;
+    private Animator bankAnimator;
 
     //Add this if we want hearts on the screen
     //public Canvas heartCanvas;
@@ -28,6 +35,8 @@ public class hero_behavior : MonoBehaviour
     {
         transform.position = new Vector2(-6.0f, 0);
         inPlay = false;
+        blackAnimator = blackScreen.GetComponent<Animator>();
+        bankAnimator = bankScene.GetComponent<Animator>();
         startGame();
     }
 
@@ -40,18 +49,25 @@ public class hero_behavior : MonoBehaviour
                 float distance = Vector2.Distance(bankInstance.transform.position, transform.position);
                 if (distance <= 1.5f)
                 {
+                    Debug.Log("Entering bank");
                     state = HeroState.AtBank;
+                    
+                    blackAnimator.SetTrigger("FadeToBlack");
+                    bankAnimator.SetBool("FadeIn", true);
                 }
             } else if (state == HeroState.AtBank)
             {
+
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     state = HeroState.Walking;
+                    blackAnimator.SetTrigger("FadeToBlack");
+                    bankAnimator.SetBool("FadeOut", true);
                 }
             } else if (distancex >= distanceToBank)
             {
                 state = HeroState.WalkingToBank;
-                Vector3 position = transform.position + new Vector3(12, 2, 0);
+                Vector3 position = transform.position + new Vector3(18, 3, 0);
                 bankInstance = Instantiate(bank, position, Quaternion.identity);
                 distancex = 0;
                 distanceToBank = Random.Range(100f, 200f);
@@ -96,7 +112,7 @@ public class hero_behavior : MonoBehaviour
                 
             }
             distancex = transform.position.x - previousPosition.x;
-        }
+        } 
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -148,23 +164,33 @@ public class hero_behavior : MonoBehaviour
         canThrow = true;
     }
 
-    /*public void getHit(int damage)
+    public void getHit(int damage)
     {
         health -= damage;
-        heartCanvas.GetComponent<HeartScript>().healthSet(health);
-        this.GetComponent<PlayerMovement>().gotHit();
+        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
         if (health > 0)
         {
             animator.SetTrigger("Hurt");
         }
-        //Debug.Log("player took " + damage + "damage");
-        if (health <= 0 && firstDeath)
+        //Debug.Log("player took " + damage + "damage");*/
+        if (health <= 0)
         {
-            firstDeath = false;
             Debug.Log("dead");
+            SceneManager.LoadScene("Leaderboard");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
-    }*/
-    //if we implement health
+    }
+ 
+        
+
+
+    /*Color color = blackScreen.GetComponent<Image>().color;
+        //color.a = 0.0f;
+        blackScreen.GetComponent<Image>().color = color;
+        color = bankScene.GetComponent<Image>().color;
+        color.a = 0.0f;
+        Debug.Log("here: " + color.a);
+        bankScene.GetComponent<Image>().color = color;
+        Debug.Log("here2: " + bankScene.GetComponent<Image>().color.a);*/
 
 }
