@@ -7,6 +7,7 @@ public class bullet_behavior : MonoBehaviour
     
     private float speed = 12;
     public new GameObject camera;
+    private int power;
     private float spinningInterval = .1f;
     private float timer = 0f; // Timer to track the elapsed time
     private float killTime = 2.0f;
@@ -15,6 +16,7 @@ public class bullet_behavior : MonoBehaviour
     {
         //gameObject.GetComponent<Rigidbody>().velocity = Vector3.right * speed;
         StartCoroutine(KillTimer());
+        power = 1;
     }
 
     
@@ -37,8 +39,14 @@ public class bullet_behavior : MonoBehaviour
         if (other.gameObject.CompareTag("turret"))
         {
             Destroy(this.gameObject);
-            other.gameObject.GetComponent<turret_behaviour>().getHit(1);
+            other.gameObject.GetComponent<turret_behaviour>().getHit(power);
         }
+        if (other.gameObject.CompareTag("laser"))
+        {
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+        }
+
     }
 
     bool IsVisible(GameObject gameObject, Camera camera)
@@ -50,6 +58,11 @@ public class bullet_behavior : MonoBehaviour
     void Spin()
     {
         this.transform.Rotate(0f, 0f, 45f);
+    }
+
+    public void setPower(int power)
+    {
+        this.power = power;
     }
 
     IEnumerator KillTimer()
