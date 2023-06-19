@@ -53,13 +53,17 @@ PrefabInstance:
       propertyPath: turretType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2734929484108620145, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
+      propertyPath: cowboyPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4817924932795870931, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: m_RootOrder
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4817924932795870931, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.246032
+      value: -6.5300007
       objectReference: {fileID: 0}
     - target: {fileID: 4817924932795870931, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -123,13 +127,17 @@ PrefabInstance:
       propertyPath: turretType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2734929484108620145, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
+      propertyPath: cowboyPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4817924932795870931, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: m_RootOrder
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4817924932795870931, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.246032
+      value: -6.53
       objectReference: {fileID: 0}
     - target: {fileID: 4817924932795870931, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: m_LocalPosition.y
