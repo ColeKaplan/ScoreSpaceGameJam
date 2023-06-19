@@ -169,8 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNames: {fileID: 1039167726}
   playerScores: {fileID: 1625863156}
-  bank: {fileID: 0}
-  Score: {fileID: 0}
+  score: {fileID: 1642334165}
 --- !u!1 &196081274
 GameObject:
   m_ObjectHideFlags: 0

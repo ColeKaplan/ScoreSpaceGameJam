@@ -1531,7 +1531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: health
-      value: 1000
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: bankScene
