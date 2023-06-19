@@ -23,6 +23,12 @@ public class PauseManager : MonoBehaviour
                 PauseGame();
             }
         }
+
+        // Check if the game window is not focused
+        if (!Application.isFocused && !isPaused)
+        {
+            PauseGame();
+        }
     }
 
     // Pause the game
@@ -50,5 +56,4 @@ public class PauseManager : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
