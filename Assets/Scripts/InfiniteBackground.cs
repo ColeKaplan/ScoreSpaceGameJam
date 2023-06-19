@@ -10,6 +10,8 @@ public class InfiniteBackground : MonoBehaviour
     public GameObject smallRockPrefab;
     public GameObject sandPrefab;
     public GameObject sproutPrefab;
+    private GameObject[] foliageArr;
+    private ArrayList spawedFoliage;
 
     public float bkgWidth = 20; 
     public float spawnDistance = 5f;
@@ -23,6 +25,8 @@ public class InfiniteBackground : MonoBehaviour
     {
         characterTransform = GameObject.FindGameObjectWithTag("Player").transform;
         lastSpawnPosition = characterTransform.position.x;
+        foliageArr = new GameObject[] {bushPrefab, bigRockPrefab, smallRockPrefab, sandPrefab, sproutPrefab};
+        spawedFoliage = new ArrayList();
     }
 
     private void Update()
@@ -32,13 +36,40 @@ public class InfiniteBackground : MonoBehaviour
 
         if (characterPosition - lastSpawnPosition > spawnDistance)
         {
-            Debug.Log("creating");
             SpawnBackground();
-            Debug.Log("its been create");
+            SpawnFoliage();
+            SpawnFoliage();
+            SpawnFoliage();
             lastSpawnPosition = characterPosition;
             
         }
         RemoveBackground(characterPosition);
+        RemoveFoliage(characterPosition);
+    }
+
+    private void SpawnFoliage()
+    {
+        int randomIndex = Random.Range(0, foliageArr.Length);
+        
+        GameObject foliageInstance = Instantiate(foliageArr[randomIndex], transform);
+        float randY = Random.Range(-7.0f, 7.0f);
+        foliageInstance.transform.position = new Vector3(lastSpawnPosition + spawnDistance + bkgWidth, randY, 0f);
+        spawedFoliage.Add(foliageInstance);
+        
+    }
+
+    private void RemoveFoliage(float characterPosition)
+    {
+        for (int i = spawedFoliage.Count - 1; i >= 0; i--)
+        {
+            GameObject foliage = (GameObject)spawedFoliage[i];
+            if (foliage.transform.position.x < characterPosition - despawnDistance)
+            {
+                spawedFoliage.RemoveAt(i);
+                Destroy(foliage.gameObject);
+            }
+        }
+        spawedFoliage.TrimToSize();
     }
 
     private void SpawnBackground()
