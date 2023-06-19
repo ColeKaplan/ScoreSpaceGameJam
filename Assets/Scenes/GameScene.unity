@@ -1530,6 +1530,10 @@ PrefabInstance:
       value: cowboy
       objectReference: {fileID: 0}
     - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: bankScene
       value: 
       objectReference: {fileID: 2018611727}
@@ -1852,11 +1856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8486909322093706980, guid: e03072e3d731b2c448ce6b54a06f7583, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.3966
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 8486909322093706980, guid: e03072e3d731b2c448ce6b54a06f7583, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8035002
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8486909322093706980, guid: e03072e3d731b2c448ce6b54a06f7583, type: 3}
       propertyPath: m_LocalPosition.z

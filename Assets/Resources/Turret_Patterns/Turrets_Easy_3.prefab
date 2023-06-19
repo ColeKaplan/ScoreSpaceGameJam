@@ -51,7 +51,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2734929484108620145, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: turretType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2734929484108620145, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: cowboyPrefab
@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2734929484108620145, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: turretType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2734929484108620145, guid: d62bb076a6d6b414aafcf243000d0cb0, type: 3}
       propertyPath: cowboyPrefab
