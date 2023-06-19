@@ -7,6 +7,8 @@ public class camera_behavior : MonoBehaviour
 
     public GameObject cowboy;
     public Camera cam;
+    public AnimationCurve curve; 
+    public float screenShakeDuration; 
 
     public float width = 16f;
     public float height = 9f;
@@ -51,5 +53,23 @@ public class camera_behavior : MonoBehaviour
 
             cam.rect = rect;
         }
+    }
+    public void startScreenShake()
+    {
+        StartCoroutine(screenShake());
+    }
+    public IEnumerator screenShake()
+    {
+        Debug.Log("screenshake");
+        float elapsedTime = 0f; 
+
+        while(elapsedTime < screenShakeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float strength = curve.Evaluate(elapsedTime / screenShakeDuration);
+            transform.position = new Vector3(cowboy.transform.position.x + 6.0f, 0, -10) + Random.insideUnitSphere*strength;
+            yield return null;
+        }
+        transform.position = new Vector3(cowboy.transform.position.x + 6.0f, 0, -10);
     }
 }
