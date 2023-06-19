@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Leaderboard leaderboard;
     void Start()
     {
+        int score = hero_behavior.hatsInBank;
+        leaderboard.SubmitScoreRoutine(score);
+        leaderboard.score.text = "" + score;
         StartCoroutine(SetupRoutine());
     }
 

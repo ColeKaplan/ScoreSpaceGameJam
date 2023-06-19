@@ -7,8 +7,15 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseCanvas;
 
     // Tracks if the game is paused
-    private bool isPaused = false;
+    public bool isPaused = false;
 
+    void Start()
+    { 
+        Time.timeScale = 1f; // Resume the game time
+        isPaused = false;
+        //pauseCanvas.SetActive(false);
+    }
+    
     private void Update()
     {
         // Check for Escape key press
@@ -22,6 +29,12 @@ public class PauseManager : MonoBehaviour
             {
                 PauseGame();
             }
+        }
+
+        // Check if the game window is not focused
+        if (!Application.isFocused && !isPaused)
+        {
+            PauseGame();
         }
     }
 
@@ -50,5 +63,20 @@ public class PauseManager : MonoBehaviour
     {
         Application.Quit();
     }
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        Debug.Log("Play button was clicked");
 
+    }
+
+    public bool getPauseStatus()
+    {
+        return isPaused;
+    }
+
+    public void setPauseStatus(bool pauseStatus)
+    {
+        isPaused = pauseStatus;
+    }
 }

@@ -9,8 +9,7 @@ public class Leaderboard : MonoBehaviour
     int leaderboardID = 15205;
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
-    public GameObject bank;
-    public TextMeshProUGUI Score;
+    public TextMeshProUGUI score;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,7 @@ public class Leaderboard : MonoBehaviour
     }
 
     [System.Obsolete]
-    IEnumerator SubmitScoreRoutine(int scoreToUpload)
+    public IEnumerator SubmitScoreRoutine(int scoreToUpload)
     {
         bool done = false;
         string playerID = PlayerPrefs.GetString("PlayerID");

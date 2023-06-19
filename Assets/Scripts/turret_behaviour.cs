@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class turret_behaviour : MonoBehaviour
@@ -9,7 +10,8 @@ public class turret_behaviour : MonoBehaviour
     {
         LINE,
         FOLLOWING,
-        OCTO
+        OCTO,
+        DOUBLE
     }
 
     public TurretType turretType;
@@ -18,19 +20,20 @@ public class turret_behaviour : MonoBehaviour
     public int health = 3;
     public float shootingInterval = 1f;
 
-    private float timer = 0f; // Timer to track the elapsed time
+    public float timer = 0f; // Timer to track the elapsed time
 
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, 90f); // Orient turret upwards
+        //transform.rotation = Quaternion.Euler(0f, 0f, 90f); // Orient turret upwards
 
     }
 
 // Update is called once per frame
 void Update()
     {
+
         if (turretType == TurretType.FOLLOWING)
         {
             if (cowboyPrefab != null)
@@ -43,19 +46,16 @@ void Update()
 
         timer += Time.deltaTime; // Increase the timer by the elapsed time
 
-        if (timer >= shootingInterval)
+        if (timer >= shootingInterval && turretType != TurretType.OCTO)
         {
             Shoot();
             timer = 0f; // Reset the timer after shooting
         }
 
-        if (turretType == TurretType.OCTO)
+        if (timer >= shootingInterval && turretType == TurretType.OCTO)
         {
-            for (int i = 0; i < 8; i++)
-            {
-                Quaternion rotation = Quaternion.Euler(0f, 0f, 45f * i);
-                GenerateLaser(rotation);
-            }
+            Shoot();
+            timer = 0f;
         }
 
         if (transform.position.x < cowboyPrefab.transform.position.x - 2)
@@ -74,15 +74,32 @@ void Update()
 
     private void GenerateLaser(Quaternion rotation)
     {
-        //rotation *= Quaternion.Euler(0f, 0f, 90f);
-        rotation *= Quaternion.Euler(0f, 0f, 90f);
-        Vector3 spawnPosition = this.transform.GetChild(0).position;
-        //Vector3 spawnPosition = transform.position + (rotation * Vector3.right * 0.5f); // Distance from turret
+        if(turretType == TurretType.OCTO)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                Quaternion rotationOcto = Quaternion.Euler(0f, 0f, 45f * (i+1));
+                Vector3 spawnPosition = this.transform.GetChild(i).position;
 
-        GameObject laser = Instantiate(laserPrefab, spawnPosition, rotation);
-        // Add any necessary logic to handle the laser prefab behavior
+                GameObject laser = Instantiate(laserPrefab, spawnPosition, rotationOcto);
+            }
+        } else
+        {
+            rotation *= Quaternion.Euler(0f, 0f, 90f);
+            Vector3 spawnPosition = this.transform.GetChild(0).position;
 
-        // Adjust the laserPrefab instantiation as needed based on your game's requirements
+            GameObject laser = Instantiate(laserPrefab, spawnPosition, rotation);
+
+            if (turretType == TurretType.DOUBLE)
+            {
+                Vector3 spawnPosition2 = this.transform.GetChild(1).position;
+
+                GameObject laser2 = Instantiate(laserPrefab, spawnPosition2, rotation);
+            }
+        }
+
+        
+      
     }
 
     public void getHit(int damage)
@@ -99,6 +116,12 @@ void Update()
             Destroy(this.gameObject);
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
+    }
+
+    public void setCowboy(GameObject cowboy)
+    {
+        Debug.Log("changed");
+        cowboyPrefab = cowboy;
     }
 
     //bullet behaviour detects the collision
