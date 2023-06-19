@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LootLocker.Requests;
 using TMPro;
+using UnityEngine.XR;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
     public TextMeshProUGUI score;
+    public TextMeshProUGUI name;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +22,8 @@ public class Leaderboard : MonoBehaviour
     public IEnumerator SubmitScoreRoutine(int scoreToUpload)
     {
         score.text = scoreToUpload.ToString();
-        Debug.Log("score routine here: " + scoreToUpload);
         bool done = false;
         string playerID = PlayerPrefs.GetString("PlayerID");
-        Debug.Log(playerID);
-        Debug.Log(leaderboardID);
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, leaderboardID, (response) =>
         {
             if (!response.success)
@@ -39,6 +38,8 @@ public class Leaderboard : MonoBehaviour
 #pragma warning restore CS0618 // Type or member is obsolete
         yield return new WaitWhile(() => done == false);
     }
+
+
 
     public IEnumerator FetchTopHighscoresRoutine()
     {
@@ -80,8 +81,30 @@ public class Leaderboard : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public IEnumerator ChangeName(string name)
     {
-        
+        bool done = false;
+        LootLockerSDKManager.SetPlayerName(name, (response) =>
+        {
+            if (!response.success)
+            {
+                Debug.Log("Name change failed" + response.Error);
+            }
+            else
+            {
+                Debug.Log("name change succeded!!! u r amazing cole wow");
+            }
+            done = true;
+        });
+        yield return new WaitWhile(() => done == false);
+        StartCoroutine(FetchTopHighscoresRoutine());
+    }
+
+    public void NameChange()
+    {
+        if (name.text != "Name")
+        {
+            StartCoroutine(ChangeName(name.text));
+        }
     }
 }
