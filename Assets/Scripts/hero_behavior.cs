@@ -85,7 +85,8 @@ public class hero_behavior : MonoBehaviour
             } else if (distancex >= distanceToBank)
             {
                 state = HeroState.WalkingToBank;
-                Vector3 position = transform.position + new Vector3(18, 3, 0);
+                float offset = transform.position.y >= 0 ? -1 : 1;
+                Vector3 position = transform.position + new Vector3(18, 2*offset, 0);
                 bankInstance = Instantiate(bank, position, Quaternion.identity);
                 distancex = 0;
                 level++;
