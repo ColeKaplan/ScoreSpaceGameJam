@@ -118,7 +118,7 @@ void Update()
             Destroy(this.gameObject);
             Debug.Log("Turret died");
             //heartCanvas.GetComponent<DarkScreen>().darken();
-            for(int i = 0; i<Random.Range(1, maxDroppedHats+1); i++)
+            for(int i = 0; i<Random.Range(2, maxDroppedHats+1); i++)
             {
                 var randomOffset = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
                 var position = randomOffset + this.transform.position; 
