@@ -17,6 +17,7 @@ public class hero_behavior : MonoBehaviour
     public int coins;
     public int hats;
     public int hatsInBank;
+    private float secondPassed;
     private float distanceToBank;
     private float distancex;
     private int level = 0;
@@ -153,6 +154,7 @@ public class hero_behavior : MonoBehaviour
         coins = 0;
         hats = 10;
         hatsInBank = 0;
+        secondPassed = 0;
         distanceToBank = Random.Range(100f, 200f);
         distancex = 0;
         previousPosition = transform.position;
@@ -240,7 +242,29 @@ public class hero_behavior : MonoBehaviour
 
     private void GiveInterest()
     {
-        hats += hats / 10;
+        if (secondPassed > 1)
+        {
+            if (hats < 10 || hats > 0)
+            {
+                hats++;
+            }
+            hats += hats / 10;
+            secondPassed = 0;
+        } else 
+        {
+            secondPassed += Time.deltaTime;
+        }
+
+    }
+
+    public int getHats()
+    {
+        return hats;
+    }
+
+    public int getHatsInBank()
+    {
+        return hatsInBank;
     }
 
     private void spawnEnemy()
