@@ -7,16 +7,22 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private int score;
 
     public Leaderboard leaderboard;
     void Start()
     {
+        score = hero_behavior.hatsInBank;
+        Debug.Log(score);   
         StartCoroutine(SetupRoutine());
+        
     }
 
+    [System.Obsolete]
     IEnumerator SetupRoutine()
     {
         yield return LoginRoutine();
+        yield return leaderboard.SubmitScoreRoutine(score);
         yield return leaderboard.FetchTopHighscoresRoutine();
     }
 
