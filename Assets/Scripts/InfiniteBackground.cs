@@ -32,9 +32,11 @@ public class InfiniteBackground : MonoBehaviour
 
         if (characterPosition - lastSpawnPosition > spawnDistance)
         {
+            Debug.Log("creating");
             SpawnBackground();
-            Debug.Log("create");
+            Debug.Log("its been create");
             lastSpawnPosition = characterPosition;
+            
         }
         RemoveBackground(characterPosition);
     }
@@ -44,6 +46,7 @@ public class InfiniteBackground : MonoBehaviour
         GameObject newBackground = Instantiate(backgroundPrefab, transform);
         newBackground.transform.position = new Vector3(lastSpawnPosition + spawnDistance + bkgWidth, 0f, 0f);
     }
+
     private void RemoveBackground(float characterPosition)
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
@@ -51,7 +54,6 @@ public class InfiniteBackground : MonoBehaviour
             Transform background = transform.GetChild(i);
             if (background.position.x < characterPosition - despawnDistance)
             {
-                Debug.Log("Destroyu");
                 Destroy(background.gameObject);
             }
         }
