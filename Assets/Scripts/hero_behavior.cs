@@ -156,6 +156,8 @@ public class hero_behavior : MonoBehaviour
         } 
     }
 
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("hat"))
@@ -163,6 +165,11 @@ public class hero_behavior : MonoBehaviour
             Debug.Log("Touched a hat");
             hats += 1;
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("turret"))
+        {
+            other.gameObject.GetComponent<turret_behaviour>().getHit(1);
+            getHit(1);
         }
     }
 
@@ -226,6 +233,7 @@ public class hero_behavior : MonoBehaviour
     {
         health -= damage;
         heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        Camera.main.GetComponent<camera_behavior>().startScreenShake();
         //Debug.Log("player took " + damage + "damage");
         if (health <= 0)
         {

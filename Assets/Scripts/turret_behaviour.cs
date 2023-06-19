@@ -20,7 +20,8 @@ public class turret_behaviour : MonoBehaviour
     public GameObject hatPrefab; 
     public int health = 3;
     public float shootingInterval = 1f;
-    public int maxDroppedHats = 3; 
+    public int maxDroppedHats = 3;
+    private bool canShoot = true;
 
     public float timer = 0f; // Timer to track the elapsed time
 
@@ -62,13 +63,18 @@ void Update()
 
         if (transform.position.x < cowboyPrefab.transform.position.x - 2)
         {
+            canShoot = false;
+        }
+
+        if (transform.position.x < cowboyPrefab.transform.position.x - 5)
+        {
             Destroy(gameObject);
         }
     }
 
     private void Shoot()
     {
-        if (laserPrefab != null)
+        if (laserPrefab != null && canShoot)
         {
             GenerateLaser(transform.rotation);
         }
@@ -116,14 +122,13 @@ void Update()
         if (health <= 0)
         {
             Destroy(this.gameObject);
-            Debug.Log("Turret died");
+            Camera.main.GetComponent <camera_behavior>().startScreenShake(); 
             //heartCanvas.GetComponent<DarkScreen>().darken();
-            for(int i = 0; i<Random.Range(2, maxDroppedHats+1); i++)
+            for(int i = 0; i<Random.Range(1, maxDroppedHats+1); i++)
             {
                 var randomOffset = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
                 var position = randomOffset + this.transform.position; 
                 GameObject droppedHat = Instantiate(hatPrefab, position, Quaternion.identity);
-                Debug.Log("Tried to create new hats");
             }
         }
     }
