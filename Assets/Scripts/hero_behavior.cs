@@ -12,7 +12,7 @@ using UnityEngine.EventSystems;
 public class hero_behavior : MonoBehaviour
 {
 
-    private int health = 10000;
+    private int health = 6;
     private bool inPlay;
     private bool canThrow;
     private HeroState state;
