@@ -9,13 +9,13 @@ using UnityEngine.UI;
 public class hero_behavior : MonoBehaviour
 {
 
-    public int health = 6;
+    private int health = 6;
     private bool inPlay;
     private bool canThrow;
     private HeroState state;
     private float verticalSpeed = 5f;
     private float horizontalSpeed = 4f;
-    private float throwCooldown = 0.2f;
+    private float throwCooldown = 0.1f;
     private int power;
     public int coins;
     public int hats;
@@ -35,6 +35,7 @@ public class hero_behavior : MonoBehaviour
     private GameObject bankInstance;
     public GameObject blackScreen;
     public GameObject bankScene;
+    public GameObject heartCanvas;
 
     private Animator blackAnimator;
     private Animator bankAnimator;
@@ -212,12 +213,8 @@ public class hero_behavior : MonoBehaviour
     public void getHit(int damage)
     {
         health -= damage;
-        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
-        if (health > 0)
-        {
-            animator.SetTrigger("Hurt");
-        }
-        //Debug.Log("player took " + damage + "damage");*/
+        heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        //Debug.Log("player took " + damage + "damage");
         if (health <= 0)
         {
             Debug.Log("dead");
@@ -255,6 +252,7 @@ public class hero_behavior : MonoBehaviour
         {
             health++;
             hats -= 10;
+            heartCanvas.GetComponent<HeartScript>().healthSet(health);
         }
     }
 
@@ -271,11 +269,11 @@ public class hero_behavior : MonoBehaviour
     {
         if (secondPassed > 1)
         {
-            if (hats < 10 || hats > 0)
+            if (hatsInBank < 10 || hatsInBank > 0)
             {
                 hats++;
             }
-            hats += hats / 10;
+            hatsInBank += hatsInBank / 10;
             secondPassed = 0;
         } else 
         {
