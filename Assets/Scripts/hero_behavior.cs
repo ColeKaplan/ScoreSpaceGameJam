@@ -83,6 +83,10 @@ public class hero_behavior : MonoBehaviour
                 bankInstance = Instantiate(bank, position, Quaternion.identity);
                 distancex = 0;
                 level++;
+                if(enemySpawnDelay > 3.5f)
+                {
+                    enemySpawnDelay -= .1f;
+                }
                 distanceToBank = Random.Range(100f, 200f);
                 previousPosition = transform.position;
             } else if (Input.GetKeyDown(KeyCode.Space))

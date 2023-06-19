@@ -39,6 +39,12 @@ public class bullet_behavior : MonoBehaviour
             Destroy(this.gameObject);
             other.gameObject.GetComponent<turret_behaviour>().getHit(1);
         }
+        if (other.gameObject.CompareTag("laser"))
+        {
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+        }
+
     }
 
     bool IsVisible(GameObject gameObject, Camera camera)
