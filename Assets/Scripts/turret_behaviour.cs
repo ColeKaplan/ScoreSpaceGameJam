@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class turret_behaviour : MonoBehaviour
@@ -115,6 +116,12 @@ void Update()
             Destroy(this.gameObject);
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
+    }
+
+    public void setCowboy(GameObject cowboy)
+    {
+        Debug.Log("changed");
+        cowboyPrefab = cowboy;
     }
 
     //bullet behaviour detects the collision
