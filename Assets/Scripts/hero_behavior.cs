@@ -20,7 +20,12 @@ public class hero_behavior : MonoBehaviour
     private float secondPassed;
     private float distanceToBank;
     private float distancex;
+    private int level = 0;
     private Vector2 previousPosition;
+
+    private float enemySpawnDelay = 6f;
+    private float enemyTimer = 4f;
+    GameObject[][] sets = new GameObject[3][];
 
     public GameObject bullet;
     public GameObject bank;
@@ -36,6 +41,8 @@ public class hero_behavior : MonoBehaviour
 
     void Start()
     {
+        setupEnemy();
+
         transform.position = new Vector2(-6.0f, 0);
         inPlay = false;
         blackAnimator = blackScreen.GetComponent<Animator>();
@@ -73,7 +80,8 @@ public class hero_behavior : MonoBehaviour
                 Vector3 position = transform.position + new Vector3(18, 3, 0);
                 bankInstance = Instantiate(bank, position, Quaternion.identity);
                 distancex = 0;
-                distanceToBank = Random.Range(30f, 40f);
+                level++;
+                distanceToBank = Random.Range(100f, 200f);
                 previousPosition = transform.position;
             } else if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -117,7 +125,15 @@ public class hero_behavior : MonoBehaviour
                     break;
                 
             }
+            //Debug.Log("timer is: " + enemyTimer + " and spawn delay is: " + enemySpawnDelay);
+            if ((state == HeroState.Walking || state == HeroState.WalkingDown || state == HeroState.WalkingUp) && enemyTimer >= enemySpawnDelay && distanceToBank - distancex >= 30) 
+            {
+                enemyTimer = 0;
+                spawnEnemy();
+            }
+
             distancex = transform.position.x - previousPosition.x;
+            enemyTimer += Time.deltaTime;
         } 
     }
 
@@ -139,7 +155,7 @@ public class hero_behavior : MonoBehaviour
         hats = 10;
         hatsInBank = 0;
         secondPassed = 0;
-        distanceToBank = Random.Range(30f, 40f);
+        distanceToBank = Random.Range(100f, 200f);
         distancex = 0;
         previousPosition = transform.position;
     }
@@ -214,15 +230,12 @@ public class hero_behavior : MonoBehaviour
         }
     }
 
-    public void Withdraw()
-    {
-        if (hatsInBank > 0)
-        {
+    public void Withdraw() {
+        if (hatsInBank > 0) {
             hats++;
             hatsInBank--;
             Debug.Log("Hats In Bank: " + hatsInBank);
-        } else 
-        {
+        } else {
             Debug.Log("No more hats in bank!");
         }
     }
@@ -252,6 +265,43 @@ public class hero_behavior : MonoBehaviour
     public int getHatsInBank()
     {
         return hatsInBank;
+    }
+
+    private void spawnEnemy()
+    {
+
+        int difficulty = (Random.Range(0, 3) + level) / 3;
+        int random = Random.Range(0, 3);
+
+
+        GameObject set = sets[difficulty][random];
+
+        
+        Vector3 position = this.transform.GetChild(0).position;
+        position.y = 0;
+
+        Instantiate(set, position, this.transform.GetChild(0).rotation);
+
+
+
+
+        //sets = { { "Turrets_Easy_1", "Turrets_Easy_2", "Turrets_Easy_3" }, { "Turrets_Medium_1", "Turrets_Medium_2", "Turrets_Medium_3" } };
+    }
+
+    private void setupEnemy()
+    {
+        sets[0] = new GameObject[3];
+        sets[1] = new GameObject[3];
+        sets[2] = new GameObject[3];
+
+        sets[0][0] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Easy_1"));
+        sets[0][1] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Easy_2"));
+        sets[0][2] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Easy_3"));
+        sets[1][0] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_1"));
+        sets[1][1] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_2"));
+        sets[1][1] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_3"));
+
+       // Debug.Log(sets[0][0]);
     }
 
 }
