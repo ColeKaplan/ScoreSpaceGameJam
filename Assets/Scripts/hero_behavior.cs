@@ -11,13 +11,14 @@ using UnityEngine.SocialPlatforms.Impl;
 public class hero_behavior : MonoBehaviour
 {
 
-    public int health = 6;
+    private int health = 6;
     private bool inPlay;
     private bool canThrow;
     private HeroState state;
     private float verticalSpeed = 5f;
     private float horizontalSpeed = 4f;
-    private float throwCooldown = 0.2f;
+    private float throwCooldown = 0.1f;
+    private int power;
     public int coins;
     public int hats;
     public static int hatsInBank;
@@ -36,6 +37,7 @@ public class hero_behavior : MonoBehaviour
     private GameObject bankInstance;
     public GameObject blackScreen;
     public GameObject bankScene;
+    public GameObject heartCanvas;
 
     private Animator blackAnimator;
     private Animator bankAnimator;
@@ -46,7 +48,7 @@ public class hero_behavior : MonoBehaviour
     void Start()
     {
         setupEnemy();
-
+        
         transform.position = new Vector2(-6.0f, 0);
         inPlay = false;
         blackAnimator = blackScreen.GetComponent<Animator>();
@@ -147,9 +149,10 @@ public class hero_behavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("coin"))
+        if (other.gameObject.CompareTag("hat"))
         {
-            coins += 1;
+            Debug.Log("Touched a hat");
+            hats += 1;
             Destroy(other.gameObject);
         }
     }
@@ -159,6 +162,7 @@ public class hero_behavior : MonoBehaviour
         inPlay = true;
         canThrow = true;
         state = HeroState.Walking;
+        power = 1;
         coins = 0;
         hats = 10;
         hatsInBank = 0;
@@ -172,6 +176,7 @@ public class hero_behavior : MonoBehaviour
     {
         Vector3 position = transform.position + new Vector3(1, 0, 0);
         GameObject instance = Instantiate(bullet, position, Quaternion.identity);
+        instance.GetComponent<bullet_behavior>().setPower(power);
         hats -= 1;
         StartCoroutine(ThrowCooldown());
     }
@@ -211,12 +216,8 @@ public class hero_behavior : MonoBehaviour
     public void getHit(int damage)
     {
         health -= damage;
-        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
-        if (health > 0)
-        {
-            animator.SetTrigger("Hurt");
-        }
-        //Debug.Log("player took " + damage + "damage");*/
+        heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        //Debug.Log("player took " + damage + "damage");
         if (health <= 0)
         {
             Debug.Log("dead");
@@ -251,21 +252,45 @@ public class hero_behavior : MonoBehaviour
         }
     }
 
+    public void BuyHeart()
+    {
+        if (health < 6 && hats >= 10)
+        {
+            health++;
+            hats -= 10;
+            heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        }
+    }
+
+    public void BuyUpgrade()
+    {
+        if (hats >= 10)
+        {
+            power++;
+            hats -= 10;
+        }
+    }
+
     private void GiveInterest()
     {
         if (secondPassed > 1)
         {
-            if (hats < 10 || hats > 0)
+            if (hatsInBank < 10 || hatsInBank > 0)
             {
                 hats++;
             }
-            hats += hats / 10;
+            hatsInBank += hatsInBank / 10;
             secondPassed = 0;
         } else 
         {
             secondPassed += Time.deltaTime;
         }
 
+    }
+
+    public int getPower()
+    {
+        return power;
     }
 
     public int getHats()
