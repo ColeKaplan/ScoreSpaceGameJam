@@ -7,22 +7,24 @@ public class background_scroll : MonoBehaviour
 
 //had some merge conflicts, please look over this
 
-    public GameObject camera;
-    private float backgroundWidth;
-    
-    void Start()
-    {
-        backgroundWidth = GetComponent<SpriteRenderer>().bounds.size.x;
-    }
+    public float scrollSpeed = 1f;
+    public float tileSize = 10f;
 
+    private Vector3 startPosition;
+    public new GameObject camera;
+    private float backgroundWidth;
+    private void Start() { }
     
-    void Update()
+    
+    
+    /*void Start()
     {
-        if (transform.position.x + backgroundWidth < camera.transform.position.x)
-        {
-            Vector2 newPos = new Vector2(transform.position.x + 2 * backgroundWidth - 0.1f, transform.position.y);
-            transform.position = newPos;
-        }
-    
+        startPosition = transform.position;
+    }*/
+
+    private void Update()
+    {
+        float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSize);
+        transform.position = startPosition + Vector3.back * newPosition;
     }
 }
