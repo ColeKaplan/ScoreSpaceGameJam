@@ -6,6 +6,7 @@ TagManager:
   tags:
   - coin
   - turret
+  - laser
   layers:
   - Default
   - TransparentFX
