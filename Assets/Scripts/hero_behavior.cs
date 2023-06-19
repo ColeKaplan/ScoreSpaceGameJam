@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Properties;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,8 +25,8 @@ public class hero_behavior : MonoBehaviour
     private int level = 0;
     private Vector2 previousPosition;
 
-    private float enemySpawnDelay = 6f;
-    private float enemyTimer = 4f;
+    private float enemySpawnDelay = 5f;
+    private float enemyTimer = 2f;
     GameObject[][] sets = new GameObject[3][];
 
     public GameObject bullet;
@@ -126,7 +128,7 @@ public class hero_behavior : MonoBehaviour
                 
             }
             //Debug.Log("timer is: " + enemyTimer + " and spawn delay is: " + enemySpawnDelay);
-            if ((state == HeroState.Walking || state == HeroState.WalkingDown || state == HeroState.WalkingUp) && enemyTimer >= enemySpawnDelay && distanceToBank - distancex >= 30) 
+            if ((state == HeroState.Walking || state == HeroState.WalkingDown || state == HeroState.WalkingUp) && enemyTimer >= enemySpawnDelay && distanceToBank - distancex >= 20) 
             {
                 enemyTimer = 0;
                 spawnEnemy();
@@ -272,8 +274,14 @@ public class hero_behavior : MonoBehaviour
 
         int difficulty = (Random.Range(0, 3) + level) / 3;
         int random = Random.Range(0, 3);
+        
+        if(difficulty > 1)
+        {
+            difficulty = 1;
+        }
+        Debug.Log(level);
 
-
+        //difficulty = 1;
         GameObject set = sets[difficulty][random];
 
         
@@ -282,6 +290,14 @@ public class hero_behavior : MonoBehaviour
 
         Instantiate(set, position, this.transform.GetChild(0).rotation);
 
+        /*
+        int children = set.transform.childCount;
+        for(int i = 0; i < children; i++)
+        {
+            set.transform.GetChild(i).GetComponent<turret_behaviour>().setCowboy(this.gameObject);
+        }
+        */
+        //set.gameObject.GetComponent<turret_behaviour>().setCowboy(this.gameObject);
 
 
 
@@ -299,7 +315,21 @@ public class hero_behavior : MonoBehaviour
         sets[0][2] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Easy_3"));
         sets[1][0] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_1"));
         sets[1][1] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_2"));
-        sets[1][1] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_3"));
+        sets[1][2] = (Resources.Load<GameObject>("Turret_Patterns/Turrets_Medium_3"));
+
+        for(int i = 0; i < 2; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                GameObject set = sets[i][j];
+                int children = set.transform.childCount;
+                for (int k = 0; k< children; k++)
+                {
+                    set.transform.GetChild(k).GetComponent<turret_behaviour>().setCowboy(this.gameObject);
+                }
+            }
+        }
+
 
        // Debug.Log(sets[0][0]);
     }
