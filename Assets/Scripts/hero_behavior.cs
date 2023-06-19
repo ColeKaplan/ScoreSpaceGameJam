@@ -16,6 +16,7 @@ public class hero_behavior : MonoBehaviour
     private float throwCooldown = 0.2f;
     public int coins;
     public int hats;
+    public int hatsInBank;
     private float distanceToBank;
     private float distancex;
     private Vector2 previousPosition;
@@ -39,7 +40,6 @@ public class hero_behavior : MonoBehaviour
         blackAnimator = blackScreen.GetComponent<Animator>();
         bankAnimator = bankScene.GetComponent<Animator>();
         bankScene.GetComponent<Image>().enabled = false;
-        Debug.Log("image enabled: " + bankScene.GetComponent<Image>().enabled);
         startGame();
     }
 
@@ -96,11 +96,14 @@ public class hero_behavior : MonoBehaviour
             {
                 case HeroState.Walking:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, 0));
+                    GiveInterest();
                     break;
                 case HeroState.WalkingDown:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, -verticalSpeed * Time.deltaTime));
+                    GiveInterest();
                     break;
                 case HeroState.WalkingUp:
+                    GiveInterest();
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime));
                     break;
                 case HeroState.WalkingToBank:
@@ -133,6 +136,7 @@ public class hero_behavior : MonoBehaviour
         state = HeroState.Walking;
         coins = 0;
         hats = 10;
+        hatsInBank = 0;
         distanceToBank = Random.Range(30f, 40f);
         distancex = 0;
         previousPosition = transform.position;
@@ -193,6 +197,37 @@ public class hero_behavior : MonoBehaviour
             SceneManager.LoadScene("Leaderboard");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
+    }
+
+    public void Deposit()
+    {
+        if (hats > 0)
+        {
+            hats--;
+            hatsInBank++;
+            Debug.Log("Hats left: " + hats);
+        } else 
+        {
+            Debug.Log("No more hats!");
+        }
+    }
+
+    public void Withdraw()
+    {
+        if (hatsInBank > 0)
+        {
+            hats++;
+            hatsInBank--;
+            Debug.Log("Hats In Bank: " + hatsInBank);
+        } else 
+        {
+            Debug.Log("No more hats in bank!");
+        }
+    }
+
+    private void GiveInterest()
+    {
+        hats += hats / 10;
     }
 
 }
