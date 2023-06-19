@@ -7,17 +7,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using LootLocker.Requests;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.EventSystems;
 
 public class hero_behavior : MonoBehaviour
 {
 
-    public int health = 6;
+    private int health = 6;
     private bool inPlay;
     private bool canThrow;
     private HeroState state;
     private float verticalSpeed = 5f;
     private float horizontalSpeed = 4f;
-    private float throwCooldown = 0.2f;
+    private float throwCooldown = 0.1f;
     private int power;
     public int coins;
     public int hats;
@@ -37,6 +38,7 @@ public class hero_behavior : MonoBehaviour
     private GameObject bankInstance;
     public GameObject blackScreen;
     public GameObject bankScene;
+    public GameObject heartCanvas;
 
     private Animator blackAnimator;
     private Animator bankAnimator;
@@ -63,11 +65,12 @@ public class hero_behavior : MonoBehaviour
             if (state == HeroState.WalkingToBank)
             {
                 float distance = Vector2.Distance(bankInstance.transform.position, transform.position);
-                if (distance <= 1.5f)
+                if (distance <= 2.0f)
                 {
                     state = HeroState.AtBank;   
                     blackAnimator.SetTrigger("FadeToBlack");
                     StartCoroutine(ToggleBankScene());
+                    GiveInterest();
 
                 }
             } else if (state == HeroState.AtBank)
@@ -114,18 +117,15 @@ public class hero_behavior : MonoBehaviour
             {
                 case HeroState.Walking:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, 0));
-                    GiveInterest();
                     break;
                 case HeroState.WalkingDown:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, -verticalSpeed * Time.deltaTime));
-                    GiveInterest();
                     break;
                 case HeroState.WalkingUp:
-                    GiveInterest();
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime));
                     break;
                 case HeroState.WalkingToBank:
-                    Vector2 targetPosition = new Vector3(bankInstance.transform.position.x, bankInstance.transform.position.y - 1, 5); 
+                    Vector2 targetPosition = new Vector3(bankInstance.transform.position.x, bankInstance.transform.position.y - 1.7f, 5); 
                     transform.position = Vector2.MoveTowards(transform.position, targetPosition, horizontalSpeed * Time.deltaTime);
                     break;
                 case HeroState.AtBank:
@@ -215,12 +215,8 @@ public class hero_behavior : MonoBehaviour
     public void getHit(int damage)
     {
         health -= damage;
-        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
-        if (health > 0)
-        {
-            animator.SetTrigger("Hurt");
-        }
-        //Debug.Log("player took " + damage + "damage");*/
+        heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        //Debug.Log("player took " + damage + "damage");
         if (health <= 0)
         {
             Debug.Log("dead");
@@ -238,21 +234,16 @@ public class hero_behavior : MonoBehaviour
         {
             hats--;
             hatsInBank++;
-            Debug.Log("Hats left: " + hats);
-        } else 
-        {
-            Debug.Log("No more hats!");
-        }
+        } 
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void Withdraw() {
         if (hatsInBank > 0) {
             hats++;
             hatsInBank--;
-            Debug.Log("Hats In Bank: " + hatsInBank);
-        } else {
-            Debug.Log("No more hats in bank!");
         }
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void BuyHeart()
@@ -261,7 +252,9 @@ public class hero_behavior : MonoBehaviour
         {
             health++;
             hats -= 10;
+            heartCanvas.GetComponent<HeartScript>().healthSet(health);
         }
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void BuyUpgrade()
@@ -271,18 +264,21 @@ public class hero_behavior : MonoBehaviour
             power++;
             hats -= 10;
         }
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void GiveInterest()
     {
         if (secondPassed > 1)
         {
-            if (hats < 10 || hats > 0)
+            if (hatsInBank < 10 && hatsInBank > 0)
             {
-                hats++;
+                hatsInBank++;
+            } else
+            {
+                hatsInBank += hatsInBank / 10;
+                secondPassed = 0;
             }
-            hats += hats / 10;
-            secondPassed = 0;
         } else 
         {
             secondPassed += Time.deltaTime;
