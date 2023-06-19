@@ -104,10 +104,19 @@ public class hero_behavior : MonoBehaviour
                 }
             } else if (Input.GetKey(KeyCode.DownArrow))
             {
-                state = HeroState.WalkingDown;
+                if(this.transform.position.y > -Camera.main.orthographicSize + this.GetComponent<Renderer>().bounds.size.y / 2)
+                {
+                    state = HeroState.WalkingDown;
+                }
+                else { state = HeroState.Walking; }
+               
             } else if (Input.GetKey(KeyCode.UpArrow))
             {
-                state = HeroState.WalkingUp;
+                if (this.transform.position.y < Camera.main.orthographicSize - this.GetComponent<Renderer>().bounds.size.y / 2)
+                {
+                    state = HeroState.WalkingUp;
+                }
+                else { state = HeroState.Walking; }
             } else
             {
                 state = HeroState.Walking;
