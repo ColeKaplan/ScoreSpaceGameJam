@@ -5,6 +5,8 @@ using UnityEngine;
 public class background_scroll : MonoBehaviour
 {
 
+//had some merge conflicts, please look over this
+
     public GameObject camera;
     private float backgroundWidth;
     
@@ -21,5 +23,6 @@ public class background_scroll : MonoBehaviour
             Vector2 newPos = new Vector2(transform.position.x + 2 * backgroundWidth - 0.1f, transform.position.y);
             transform.position = newPos;
         }
+    
     }
 }

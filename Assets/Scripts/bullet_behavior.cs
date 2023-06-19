@@ -6,7 +6,7 @@ public class bullet_behavior : MonoBehaviour
 {
     
     private float speed = 12;
-    public GameObject camera;
+    public new GameObject camera;
     private float spinningInterval = .1f;
     private float timer = 0f; // Timer to track the elapsed time
     private float killTime = 2.0f;
@@ -36,8 +36,8 @@ public class bullet_behavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("turret"))
         {
-            Debug.Log("bullet destroyed - turret");
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            other.gameObject.GetComponent<turret_behaviour>().getHit(1);
         }
     }
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4953634521232493850}
   m_Layer: 0
   m_Name: cowboy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c4882b3f2ce4058b26a0a4dc273e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 6
   coins: 0
+  hats: 0
   bullet: {fileID: 5404952690104185217, guid: f750699bf97c7414082f7e89251f1225, type: 3}
+  bank: {fileID: 7812950953142906178, guid: 1f6faf36631994af0b3cbb20329b6dc1, type: 3}
+  blackScreen: {fileID: 2245612380436345839, guid: 3e07eb75897b2416bb8e06329804d760, type: 3}
+  bankScene: {fileID: 2245612380436345839, guid: 9b234569993c94d318be6b662d6c6221, type: 3}
 --- !u!50 &-3759537598611143312
 Rigidbody2D:
   serializedVersion: 4

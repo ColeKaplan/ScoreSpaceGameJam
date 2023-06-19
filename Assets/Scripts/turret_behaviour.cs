@@ -18,7 +18,7 @@ public class turret_behaviour : MonoBehaviour
     public int health = 3;
     public float shootingInterval = 1f;
 
-    private float timer = 0f; // Timer to track the elapsed time
+    public float timer = 0f; // Timer to track the elapsed time
 
 
     // Start is called before the first frame update
@@ -58,7 +58,7 @@ void Update()
             }
         }
 
-        if (transform.position.x < cowboyPrefab.transform.position.x)
+        if (transform.position.x < cowboyPrefab.transform.position.x - 2)
         {
             Destroy(gameObject);
         }
@@ -74,7 +74,10 @@ void Update()
 
     private void GenerateLaser(Quaternion rotation)
     {
-        Vector3 spawnPosition = transform.position + (rotation * Vector3.up * 0.5f); // Distance from turret
+        //rotation *= Quaternion.Euler(0f, 0f, 90f);
+        rotation *= Quaternion.Euler(0f, 0f, 90f);
+        Vector3 spawnPosition = this.transform.GetChild(0).position;
+        //Vector3 spawnPosition = transform.position + (rotation * Vector3.right * 0.5f); // Distance from turret
 
         GameObject laser = Instantiate(laserPrefab, spawnPosition, rotation);
         // Add any necessary logic to handle the laser prefab behavior
@@ -82,7 +85,24 @@ void Update()
         // Adjust the laserPrefab instantiation as needed based on your game's requirements
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void getHit(int damage)
+    {
+        health -= damage;
+        /*heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        if (health > 0)
+        {
+            animator.SetTrigger("Hurt");
+        }
+        //Debug.Log("player took " + damage + "damage");*/
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+            //heartCanvas.GetComponent<DarkScreen>().darken();
+        }
+    }
+
+    //bullet behaviour detects the collision
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
         {
@@ -92,5 +112,5 @@ void Update()
                 Destroy(gameObject);
             }
         }
-    }
+    }*/
 }
