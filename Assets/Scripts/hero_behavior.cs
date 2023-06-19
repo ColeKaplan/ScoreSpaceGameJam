@@ -155,6 +155,8 @@ public class hero_behavior : MonoBehaviour
         } 
     }
 
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("hat"))
@@ -162,6 +164,11 @@ public class hero_behavior : MonoBehaviour
             Debug.Log("Touched a hat");
             hats += 1;
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("turret"))
+        {
+            Destroy(other.gameObject);
+            getHit(1);
         }
     }
 
