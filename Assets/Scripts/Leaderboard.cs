@@ -14,14 +14,17 @@ public class Leaderboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //int score = bank.GetComponent<hero_behavior>().getHats()
     }
 
     [System.Obsolete]
     public IEnumerator SubmitScoreRoutine(int scoreToUpload)
     {
+        score.text = scoreToUpload.ToString();
+        Debug.Log("score routine here: " + scoreToUpload);
         bool done = false;
         string playerID = PlayerPrefs.GetString("PlayerID");
+        Debug.Log(playerID);
+        Debug.Log(leaderboardID);
         LootLockerSDKManager.SubmitScore(playerID, scoreToUpload, leaderboardID, (response) =>
         {
             if (!response.success)
@@ -33,6 +36,7 @@ public class Leaderboard : MonoBehaviour
             }
             done = true;
         });
+#pragma warning restore CS0618 // Type or member is obsolete
         yield return new WaitWhile(() => done == false);
     }
 
