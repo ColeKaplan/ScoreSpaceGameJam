@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using LootLocker.Requests;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class hero_behavior : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class hero_behavior : MonoBehaviour
     private int power;
     public int coins;
     public int hats;
-    public int hatsInBank;
+    public static int hatsInBank;
     private float secondPassed;
     private float distanceToBank;
     private float distancex;
@@ -146,9 +148,10 @@ public class hero_behavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("coin"))
+        if (other.gameObject.CompareTag("hat"))
         {
-            coins += 1;
+            Debug.Log("Touched a hat");
+            hats += 1;
             Destroy(other.gameObject);
         }
     }
@@ -221,10 +224,13 @@ public class hero_behavior : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("dead");
+            
             SceneManager.LoadScene("Leaderboard");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
     }
+
+
 
     public void Deposit()
     {
