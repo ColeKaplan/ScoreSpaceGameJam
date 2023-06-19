@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using LootLocker.Requests;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class hero_behavior : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class hero_behavior : MonoBehaviour
     private float throwCooldown = 0.2f;
     public int coins;
     public int hats;
-    public int hatsInBank;
+    public static int hatsInBank;
     private float secondPassed;
     private float distanceToBank;
     private float distancex;
@@ -218,10 +220,13 @@ public class hero_behavior : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("dead");
+            
             SceneManager.LoadScene("Leaderboard");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
     }
+
+
 
     public void Deposit()
     {
