@@ -167,7 +167,7 @@ public class hero_behavior : MonoBehaviour
         }
         if (other.gameObject.CompareTag("turret"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<turret_behaviour>().getHit(1);
             getHit(1);
         }
     }
