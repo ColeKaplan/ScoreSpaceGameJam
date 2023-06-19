@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672346614}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a43c4b6205377b4c963c88a9111d8c7, type: 3}
   m_Name: 
@@ -1350,6 +1350,10 @@ PrefabInstance:
       propertyPath: blackScreen
       value: 
       objectReference: {fileID: 806335551}
+    - target: {fileID: 1669290874004098849, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+      propertyPath: enemySpawnDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2736172755743607349, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1566,6 +1570,10 @@ PrefabInstance:
     - target: {fileID: 2342643534826844493, guid: e03072e3d731b2c448ce6b54a06f7583, type: 3}
       propertyPath: m_Name
       value: Turret_Following
+      objectReference: {fileID: 0}
+    - target: {fileID: 2342643534826844493, guid: e03072e3d731b2c448ce6b54a06f7583, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2891090280979596057, guid: e03072e3d731b2c448ce6b54a06f7583, type: 3}
       propertyPath: turretType
