@@ -232,8 +232,10 @@ MonoBehaviour:
   turretType: 2
   laserPrefab: {fileID: 102316159419468350, guid: 08a984abfade9d6469caaf9f5181db1f, type: 3}
   cowboyPrefab: {fileID: 750285416907767269, guid: 4e2516fa0a1214c099d5de1048a22e42, type: 3}
+  hatPrefab: {fileID: 5404952690104185217, guid: f21e6f5caacb77d42977593e2f149adf, type: 3}
   health: 1
   shootingInterval: 1
+  maxDroppedHats: 3
   timer: 0
 --- !u!58 &6302722497484394799
 CircleCollider2D:

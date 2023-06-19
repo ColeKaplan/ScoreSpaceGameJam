@@ -17,8 +17,10 @@ public class turret_behaviour : MonoBehaviour
     public TurretType turretType;
     public GameObject laserPrefab;
     public GameObject cowboyPrefab;
+    public GameObject hatPrefab; 
     public int health = 3;
     public float shootingInterval = 1f;
+    public int maxDroppedHats = 3; 
 
     public float timer = 0f; // Timer to track the elapsed time
 
@@ -114,7 +116,15 @@ void Update()
         if (health <= 0)
         {
             Destroy(this.gameObject);
+            Debug.Log("Turret died");
             //heartCanvas.GetComponent<DarkScreen>().darken();
+            for(int i = 0; i<Random.Range(1, maxDroppedHats+1); i++)
+            {
+                var randomOffset = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+                var position = randomOffset + this.transform.position; 
+                GameObject droppedHat = Instantiate(hatPrefab, position, Quaternion.identity);
+                Debug.Log("Tried to create new hats");
+            }
         }
     }
 
