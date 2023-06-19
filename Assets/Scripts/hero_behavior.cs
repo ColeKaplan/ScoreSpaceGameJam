@@ -232,6 +232,7 @@ public class hero_behavior : MonoBehaviour
     {
         health -= damage;
         heartCanvas.GetComponent<HeartScript>().healthSet(health);
+        Camera.main.GetComponent<camera_behavior>().startScreenShake();
         //Debug.Log("player took " + damage + "damage");
         if (health <= 0)
         {
