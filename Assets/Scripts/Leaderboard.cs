@@ -7,7 +7,7 @@ using UnityEngine.XR;
 
 public class Leaderboard : MonoBehaviour
 {
-    int leaderboardID = 15205;
+    int leaderboardID = 15434;
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
     public TextMeshProUGUI score;
@@ -44,7 +44,7 @@ public class Leaderboard : MonoBehaviour
     public IEnumerator FetchTopHighscoresRoutine()
     {
         bool done = false;
-        LootLockerSDKManager.GetScoreList("leaderboard", 5, 0, (response) =>
+        LootLockerSDKManager.GetScoreList(leaderboardID.ToString(), 5, 0, (response) =>
         {
             if (response.success)
             {
