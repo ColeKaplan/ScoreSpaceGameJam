@@ -106,3 +106,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cowboy: {fileID: 0}
+  cam: {fileID: 0}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.91992366
+      outSlope: 0.91992366
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.06666666
+      value: 0.06132824
+      inSlope: 0.8518735
+      outSlope: 0.8518735
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11735293
+      value: 0.10105732
+      inSlope: 0.5210352
+      outSlope: 0.5210352
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2460926
+      value: 0.13430397
+      inSlope: -0.00470452
+      outSlope: -0.00470452
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.55880857
+      value: 0.05060362
+      inSlope: -0.18364732
+      outSlope: -0.18364732
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0666809
+      value: 0
+      inSlope: -0.09963846
+      outSlope: -0.09963846
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  screenShakeDuration: 0.75
+  width: 16
+  height: 9
