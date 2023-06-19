@@ -18,6 +18,7 @@ public class hero_behavior : MonoBehaviour
     private float verticalSpeed = 5f;
     private float horizontalSpeed = 4f;
     private float throwCooldown = 0.2f;
+    private int power;
     public int coins;
     public int hats;
     public static int hatsInBank;
@@ -46,7 +47,7 @@ public class hero_behavior : MonoBehaviour
     void Start()
     {
         setupEnemy();
-
+        
         transform.position = new Vector2(-6.0f, 0);
         inPlay = false;
         blackAnimator = blackScreen.GetComponent<Animator>();
@@ -160,6 +161,7 @@ public class hero_behavior : MonoBehaviour
         inPlay = true;
         canThrow = true;
         state = HeroState.Walking;
+        power = 1;
         coins = 0;
         hats = 10;
         hatsInBank = 0;
@@ -173,6 +175,7 @@ public class hero_behavior : MonoBehaviour
     {
         Vector3 position = transform.position + new Vector3(1, 0, 0);
         GameObject instance = Instantiate(bullet, position, Quaternion.identity);
+        instance.GetComponent<bullet_behavior>().setPower(power);
         hats -= 1;
         StartCoroutine(ThrowCooldown());
     }
@@ -252,6 +255,24 @@ public class hero_behavior : MonoBehaviour
         }
     }
 
+    public void BuyHeart()
+    {
+        if (health < 6 && hats >= 10)
+        {
+            health++;
+            hats -= 10;
+        }
+    }
+
+    public void BuyUpgrade()
+    {
+        if (hats >= 10)
+        {
+            power++;
+            hats -= 10;
+        }
+    }
+
     private void GiveInterest()
     {
         if (secondPassed > 1)
@@ -267,6 +288,11 @@ public class hero_behavior : MonoBehaviour
             secondPassed += Time.deltaTime;
         }
 
+    }
+
+    public int getPower()
+    {
+        return power;
     }
 
     public int getHats()
