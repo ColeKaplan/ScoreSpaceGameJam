@@ -1,11 +1,10 @@
 # ExtraVirginProgrammers  
 
-Go to window -> package manager. Then click the plus in the upper left and add package from giturl. Paste this link into it  
-https://github.com/LootLocker/unity-sdk.git  
-  
-Then go to edit -> project settings -> lootlocker sdk.  
-Paste these in:  
-Api Key : dev_b4a9e2f2aaf145018edd235bbd980363  
-Domain Key : d2g4hq6q  
-Game_version : 1.2.1  
+https://colewawa.itch.io/wild-ranger
+
+Please play and have fun!
+
+The confusing part is how you get score, when you die your score is how many hats are in the bank.
+\nThe bank will continue to appear after a random amount of time as a checkpoint.
+\nYes there are upgrades in the shop that work, however they are never beneficial since we did not have time to take advantage of them.
 
