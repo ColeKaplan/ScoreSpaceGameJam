@@ -135,7 +135,6 @@ void Update()
 
     public void setCowboy(GameObject cowboy)
     {
-        Debug.Log("changed");
         cowboyPrefab = cowboy;
     }
 

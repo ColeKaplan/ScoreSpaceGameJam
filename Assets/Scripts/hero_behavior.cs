@@ -70,7 +70,6 @@ public class hero_behavior : MonoBehaviour
                     state = HeroState.AtBank;   
                     blackAnimator.SetTrigger("FadeToBlack");
                     StartCoroutine(ToggleBankScene());
-                    GiveInterest();
 
                 }
             } else if (state == HeroState.AtBank)
@@ -127,12 +126,15 @@ public class hero_behavior : MonoBehaviour
             {
                 case HeroState.Walking:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, 0));
+                    GiveInterest();
                     break;
                 case HeroState.WalkingDown:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, -verticalSpeed * Time.deltaTime));
+                    GiveInterest();
                     break;
                 case HeroState.WalkingUp:
                     transform.Translate(new Vector2(horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime));
+                    GiveInterest();
                     break;
                 case HeroState.WalkingToBank:
                     Vector2 targetPosition = new Vector3(bankInstance.transform.position.x, bankInstance.transform.position.y - 1.7f, 5); 
@@ -144,7 +146,6 @@ public class hero_behavior : MonoBehaviour
                     break;
                 
             }
-            //Debug.Log("timer is: " + enemyTimer + " and spawn delay is: " + enemySpawnDelay);
             if ((state == HeroState.Walking || state == HeroState.WalkingDown || state == HeroState.WalkingUp) && enemyTimer >= enemySpawnDelay && distanceToBank - distancex >= 20) 
             {
                 enemyTimer = 0;
@@ -162,7 +163,6 @@ public class hero_behavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("hat"))
         {
-            Debug.Log("Touched a hat");
             hats += 1;
             Destroy(other.gameObject);
         }
@@ -234,11 +234,8 @@ public class hero_behavior : MonoBehaviour
         health -= damage;
         heartCanvas.GetComponent<HeartScript>().healthSet(health);
         Camera.main.GetComponent<camera_behavior>().startScreenShake();
-        //Debug.Log("player took " + damage + "damage");
         if (health <= 0)
         {
-            Debug.Log("dead");
-            
             SceneManager.LoadScene("Leaderboard");
             //heartCanvas.GetComponent<DarkScreen>().darken();
         }
@@ -279,28 +276,27 @@ public class hero_behavior : MonoBehaviour
     {
         if (hats >= 10)
         {
-            power++;
-            hats -= 10;
+            power = 2;
+            hats -= 0;
         }
         EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void GiveInterest()
     {
-        if (secondPassed > 1)
+        if (secondPassed > 3)
         {
-            if (hatsInBank < 10 && hatsInBank > 0)
+            if (hatsInBank < 10 && hatsInBank >= 0 && secondPassed > 5)
             {
                 hatsInBank++;
-            } else
+                secondPassed = 0;
+            } else if(hatsInBank >= 10)
             {
                 hatsInBank += hatsInBank / 10;
                 secondPassed = 0;
             }
-        } else 
-        {
-            secondPassed += Time.deltaTime;
         }
+        secondPassed += Time.deltaTime;
 
     }
 
@@ -329,7 +325,6 @@ public class hero_behavior : MonoBehaviour
         {
             difficulty = 1;
         }
-        Debug.Log(level);
 
         //difficulty = 1;
         GameObject set = sets[difficulty][random];
@@ -381,7 +376,6 @@ public class hero_behavior : MonoBehaviour
         }
 
 
-       // Debug.Log(sets[0][0]);
     }
 
 }
